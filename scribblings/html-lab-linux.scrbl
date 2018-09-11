@@ -2,16 +2,24 @@
 
 @(require "./fundhum-scribbling.rkt")
 
+@prefix{html-lab}
+
 @title{Laboratory: Writing Web pages on Linux}
 @author{Samuel A. Rebelsky}
 
 @summary{We explore basic techniques for building Web pages in HTML and CSS.  We also explore how to deploy them on a standard Linux Web server.}
 
-@section[#:tag "html-linux-prep"]{Preparation}
+@section:preparation{}
 
-@section[#:tag "html-linux-exercises"]{Exercises}
+@section:exercises{}
 
-@section[#:tag "html-linux-extra"]{For those with extra time}
+@exercise{An exercise}
 
-@section[#:tag "html-linux-reference"]{Reference}
+@exercise{Another exercise}
+
+@section:extra{}
+
+@extra{Something extra}
+
+@section:reference{}
 

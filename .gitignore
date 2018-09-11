@@ -1,0 +1,13 @@
+# Generated files
+*.html
+*.css
+*.tex
+*.pdf
+
+# Editor emp files
+*.swp
+*~
+
+# Racket package stuff
+compiled
+doc

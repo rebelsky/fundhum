@@ -14,6 +14,7 @@ programming language for most of those examples.  See the
 
 @table-of-contents[]
 
-@include-section["intro.scrbl"]
-@include-section["html-reading.scrbl"]
-@include-section["html-lab-linux.scrbl"]
+@include-section{intro.scrbl}
+@include-section{html-reading.scrbl}
+@include-section{html-lab-linux.scrbl}
+@include-section{starting-scheme-lab.scrbl}

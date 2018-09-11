@@ -11,7 +11,7 @@ sheets.}
 
 @italic{Prerequisites:} This module requires no particular prerequisites.
 
-@section*[#:tag "html-introduction"]{Introduction}
+@section[#:tag "html-introduction"]{Introduction}
 
 What is the Web?
 

@@ -1,10 +1,18 @@
 default:
 	@echo "Please specify what to make."
 	@echo "  make update - rebuild the package."
-	@echo "  make docs - open up the documentation."
+	@echo "  make read - open up the installed documentation."
+	@echo "  make web - build the Web site."
+	@echo "  make pdf - build the PDF version."
 
 update:
 	raco pkg update --link `pwd`
 
-docs:
+read:
 	raco docs fundhum
+
+web:
+	scribble --htmls scribblings/fundhum.scrbl
+
+pdf:
+	scribble --pdf scribblings/fundhum.scrbl

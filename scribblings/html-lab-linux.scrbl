@@ -2,7 +2,7 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@prefix{html-lab}
+@prefix{html-lab-linux}
 
 @title{Laboratory: Writing Web pages on Linux}
 @author{Samuel A. Rebelsky}

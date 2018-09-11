@@ -3,6 +3,7 @@
 *.css
 *.tex
 *.pdf
+*.js
 
 # Editor emp files
 *.swp
@@ -11,3 +12,6 @@
 # Racket package stuff
 compiled
 doc
+
+# The standard deploy directory if I make things by hand
+fundhum

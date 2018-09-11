@@ -7,8 +7,10 @@
 
 @defmodule[fundhum]
 
-
-#lang scribble/manual
+FunDHum provides an introduction to algorithmic thinking using 
+examples drawn from the digital humanities.  It employs the Racket
+programming language for most of those examples.  See the 
+@secref["Introduction"] for more information.  
 
 @table-of-contents[]
 

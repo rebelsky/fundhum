@@ -30,7 +30,7 @@
 ;;; Produces:
 ;;;   summary, a Scribble expression
 (define-syntax-rule (summary content ...)
-  (elem (emph "Summary" content ...)))
+  (elem (emph "Summary: " content ...)))
 
 ;;; Syntax:
 ;;;   section*

@@ -2,16 +2,18 @@
 
 @(require "./fundhum-scribbling.rkt")
 
+@prefix{_PREFIX_}
+
 @title{_TITLE_}
 @author{Samuel A. Rebelsky}
 
 @summary{_SUMMARY_}
 
-@section{Preparation}
+@section:preparation{}
 
-@section{Exercises}
+@section:exercises{}
 
-@section{For those with extra time}
+@section:extra{}
 
-@section{Reference}
+@section:reference{}
 

@@ -2,7 +2,7 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@title{Writing Web pages}
+@title[#:tag "html-reading"]{Writing Web pages}
 @author{Samuel A. Rebelsky}
 
 @summary{We introduce basic mechanisms for creating and linking pages

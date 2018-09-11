@@ -16,4 +16,4 @@ programming language for most of those examples.  See the
 
 @include-section["intro.scrbl"]
 @include-section["html-reading.scrbl"]
-@include-section["html-lab.scrbl"]
+@include-section["html-lab-linux.scrbl"]

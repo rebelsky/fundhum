@@ -254,22 +254,28 @@ be hierarchical.
 
 @section{A longer example}
 
+Here's one possible representation of the exerpt in XML.  
+
 @codeblock|{
 <excerpt>
   <source>
     <book
      author='Lewis Carroll'
+     title='Through the Looking Glass'
+     subtitle='and What Alice Found There'
      actual-author='Charles Lutwidge Dodgson'
      publisher='Project Gutenberg'
      version='The Millennium Fulcrum Edition 1.7'
-     date='6 October 2016'
+     date='2016-10-06'
+     original-publication-year='1871'
      url='https://www.gutenberg.org/files/12/12-h/12-h.htm'/>
   </source>
   <paragraph>
     <quotation mode='spoken' source='White Queen'>
        What manner of things?
     </quotation>
-    said the Queen, looking over the book 
+    said the Queen, looking over the 
+    <ref target="King's memorandum">book</ref> 
     <aside>
       (in which Alice had put 
       <quotation mode='written' source='Alice'>
@@ -282,8 +288,8 @@ be hierarchical.
   </paragraph>
 
   <paragraph>
-    There was a book lying near Alice on the table, and while she
-    sat watching the White King 
+    There was a <ref target='jabberwocky'>book</ref> lying near 
+    Alice on the table, and while she sat watching the White King 
     <aside>
       (for she was still a little anxious
       about him, and had the ink all ready to throw over him, in case
@@ -310,8 +316,9 @@ be hierarchical.
         ebaw eht ni elbmig dna eryg diD
       </line>
       <line translation="All mimsy were the borogoves,"
-            note="For additional explanation, see the short story
-                  by Henry Kuttner and C. L. Moore writing as Lewis Padgett">
+            note='For additional explanation, see the short story
+	          "Mimsy Were the Borogoves" by Henry Kuttner and 
+		  C. L. Moore writing as Lewis Padgett'>
         ,sevogorob eht erew ysmim llA
       </line>
       <line type='continuation'
@@ -333,3 +340,8 @@ changing line breaks and inserting space at the beginning of the line.
 XML collapses most of the whitespace in a document into a single space,
 which allows us to organize our documents in a way that may be more
 readable to human beings.
+
+Finally, I've added a few bits of information for the reader or
+analyst, such as references to distinguish the two books that appear
+in this scene, translations of the mirrored text, and an external
+reference for more information about a line in Jabberwocky.

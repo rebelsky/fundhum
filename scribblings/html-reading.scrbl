@@ -9,7 +9,7 @@
 on the World-Wide Web.  We also explore the roles of markup and stle
 sheets.}
 
-@italic{Prerequisites:} This module requires no particular prerequisites.
+@italic{Prerequisites:} @secref["xml-reading"]
 
 @section[#:tag "html-introduction"]{Introduction}
 

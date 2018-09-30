@@ -258,11 +258,12 @@ be hierarchical.
 <excerpt>
   <source>
     <book
-     author="Lewis Carroll"
-     actual-author="Charles Lutwidge Dodgson"
-     publisher="Project Gutenberg"
-     version="The Millennium Fulcrum Edition 1.7"
-     url=https://www.gutenberg.org/files/12/12-h/12-h.htm"/>
+     author='Lewis Carroll'
+     actual-author='Charles Lutwidge Dodgson'
+     publisher='Project Gutenberg'
+     version='The Millennium Fulcrum Edition 1.7'
+     date='6 October 2016'
+     url='https://www.gutenberg.org/files/12/12-h/12-h.htm'/>
   </source>
   <paragraph>
     <quotation mode='spoken' source='White Queen'>
@@ -299,13 +300,36 @@ be hierarchical.
     It was like this.
   </paragraph>
 
-  <poem mode="mirrored" title=YKCOWREBBAJ">
+  <poem mode='right-align' title='YKCOWREBBAJ'>
     <stanza>
-      <line>sevot yhtils eht dna ,gillirb sawT’</line>
-      <line type='continuation'>ebaw eht ni elbmig dna eryg diD</line>
-      <line>,sevogorob eht erew ysmim llA</line>
-      <line type='continuation'> .ebargtuo shtar emom eht dnA</line>
+      <line translation="'Twas brillig, and the slithy toves">
+        sevot yhtils eht dna ,gillirb sawT’
+      </line>
+      <line type='continuation'
+            translation="Did gyre and gimble in the wabe">
+        ebaw eht ni elbmig dna eryg diD
+      </line>
+      <line translation="All mimsy were the borogoves,"
+            note="For additional explanation, see the short story
+                  by Henry Kuttner and C. L. Moore writing as Lewis Padgett">
+        ,sevogorob eht erew ysmim llA
+      </line>
+      <line type='continuation'
+            translation="And the mome raths outgrabe."> 
+        .ebargtuo shtar emom eht dnA
+      </line>
     </stanza>
   </poem>
 </excerpt>
 }|
+
+You may have noted that I've made the title of the poem an attribute,
+rather than putting it in the text and marking it as a title.  One
+of the strengths (or weaknesses, depending on your perspective) of
+XML is that we can use either approach.
+
+You may also have noted that I've made liberal use of ``whitespace'',
+changing line breaks and inserting space at the beginning of the line.
+XML collapses most of the whitespace in a document into a single space,
+which allows us to organize our documents in a way that may be more
+readable to human beings.

@@ -18,4 +18,5 @@ programming language for most of those examples.  See the
 @include-section{xml-reading.scrbl}
 @include-section{html-reading.scrbl}
 @include-section{html-lab-linux.scrbl}
+@include-section{algorithm-building-blocks.scrbl}
 @include-section{starting-scheme-lab.scrbl}

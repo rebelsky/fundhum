@@ -1,5 +1,6 @@
-#lang scribble/manual
+#lang scribble/base
 
+@(require scribble/manual)
 @(require "./fundhum-scribbling.rkt")
 
 @title{Generalized document markup with XML}
@@ -12,7 +13,7 @@ collections of information.}
 
 @italic{Prerequisites:} This section has no prerequisites.
 
-@section[#:tag "xml-introduction"]{Data, formatting, structure, and metadata}
+@section[#:tag "xml-introduction"]{Content, formatting, structure, and metadata}
 
 As you may recall from the introduction, computer scientists concern
 themselves with two broad issues: algorithms and data representation.
@@ -24,7 +25,7 @@ considering the kind of information we might store for a textual
 work in digital form, such as a book, an article, or a poem.
 
 Consider, for example, this excerpt from The Millennium Fulcrum Edition 1.7
-of Lewis Carroll's @italic{Through the Looking Glass}. (This particular version was found on Project Gutenberg at @url{https://www.gutenberg.org/ebooks/12}.)
+of Lewis Carroll's @italic{Through the Looking-Glass}. (This particular version was found on Project Gutenberg at @url{https://www.gutenberg.org/ebooks/12}.)
 
 @nested[#:style 'inset]{
 @;{ Alice looked on with great interest as the King took an enormous memorandum-book out of his pocket, and began writing. A sudden thought struck her, and she took hold of the end of the pencil, which came some way over his shoulder, and began writing for him. }
@@ -79,27 +80,27 @@ wide variety of symbols used in non-Roman alphabets.
 You may have noted that there's more to the text above than just a
 sequence of characters.  For example, there are breaks between
 blocks of text, breaks that help us identify those blocks as
-paragraphs (or, perhaps, stanzas in a poem).  Some of the text is
-in italics.  And it appears that Carroll (or Carroll's typesetter)
-has used italics for two separate meanings.  In one case
-(``@emph{your}''), the italics suggest an emphasis in spoken language.
-In the other case, they appear to serve to distinguish quoted written
-text (in both quotation marks and italics) from quoted spoken text
-(only with quotation marks).  There are certainly a variety of other
-reasons that people use italics.  For example, book titles usually
-appear in italics, as do certain section headings.
+paragraphs (or, perhaps, lines or stanzas in a poem).  Some of the
+text is in italics.  And it appears that Carroll (or Carroll's
+typesetter) has used italics for two separate meanings.  In one
+case (``@emph{your}''), the italics suggest an emphasis in spoken
+language.  In the other case, they appear to serve to distinguish
+quoted written text (in both quotation marks and italics) from
+quoted spoken text (only with quotation marks).  There are certainly
+a variety of other reasons that people use italics.  For example,
+book titles usually appear in italics, as do certain section headings.
 
 We will also need to represent those kinds of @emph{formatting} and
 @emph{structural} information.  And, once again, there are a variety
 of techniques that are possible.  Some programs, like Microsoft
 Word, use a custom sequence of bits that it hides from the reader.
-Others use agreed-upon sequences of characters.  For example, in
-Scribble, the typesetting language I'm using for this book, I might
-write @code|{@emph{your}}| to indicate that ``your'' is emphasized;
-in LaTeX, a popular typesetting language for Mathematicians, Computer
-Scientists, and Economists, I might write @code|{\textit{your}}|;
+Others use agreed-upon sequences of visible characters.  For example,
+in Scribble, the typesetting language I'm using for this book, I
+might write @code|{@emph{your}}| to indicate that ``your'' is
+emphasized; in LaTeX, a popular typesetting language for Mathematicians,
+Computer Scientists, and Economists, I might write @code|{\textit{your}}|;
 and in HTML, the primary document markup language for the World-Wide
-Web, I might write @code|{<em>your</em>}|.
+Web, I might write @xml|{<em>your</em>}|.
 
 Finally, we need to represent information about the text, which
 both computer scientists and digital humanists call ``@emph{metadata}''.
@@ -175,18 +176,18 @@ The basic approach of XML is relatively straightforward: You surround
 a piece of text with ``tags'' that indicate something (role,
 structure, format) about the text.  A simple opening tag consists
 of a left angle bracket, a word that describes the text, and a right
-angle bracket, as in @code|{<paragraph>}|.  A closing tag looks similar,
+angle bracket, as in @verb|{<paragraph>}|.  A closing tag looks similar,
 except that there is a forward slash after the left angle bracket, as in
-@code|{</paragraph>}|.  Here are a few examples.
+@verb|{</paragraph>}|.  Here are a few examples.
 
 @itemize{
-@item{@code|{<emphasize>your</emphasize>}| indicates that the word ``your''
-should be emphasized}
-@item{@code|{<paragraph>There was a book lying near Alice on the table ... she}| @code|{said to herself.</paragraph>}| indicates that the given text forms 
-a paragraph.}
-@item{@code|{<quotation>What manner of things?</quotation>}| indicates that ``What
-manner of things?'' is a quotation.}
-@item{@code|{<poem><title>YKCOWREBBAJ</title>...</poem>}| indicates that ``YKCOWREBBAJ'' is the title of a poem.}
+@item{@xml|{<emphasize>your</emphasize>}| indicates that the word ``your''
+should be emphasized.  In this case, we have annotated the document to indicate its formatting.}
+@item{@xml|{<paragraph>There was a book lying near Alice on the table ... she said to herself.</paragraph>}| indicates that the given text forms 
+a paragraph.  In this case, we have annotated the document to indicate its structure.}
+@item{@xml|{<quotation>What manner of things?</quotation>}| indicates that ``What
+manner of things?'' is a quotation.  Here, we have also annotated the document to indicate its structure.  The structure also implies a bit of formatting---we should surround the quotation with the appropriate quotation symbols.}
+@item{@xml|{<poem><title>YKCOWREBBAJ</title>...</poem>}| indicates that ``YKCOWREBBAJ'' is the title of a poem.}
 }
 
 At times, we want to include additional information about the tagged
@@ -196,7 +197,8 @@ called @emph{attributes} to the tags.  Each attribute consists of
 a word describing the type of attribute, an equals sign, and the
 associated information surrounded by single- or double-quotation marks.
 
-@codeblock|{
+@xml-block|{
+#lang reader "plaintext.rkt"
 <paragraph>
   <quotation mode='spoken' source='White Queen'>What manner of things?</quotation>
   said the Queen, looking over the book (in which Alice had put 
@@ -259,12 +261,13 @@ be hierarchical.
 
 Here's one possible representation of the excerpt in XML.  
 
-@codeblock|{
+@xml-block|{
+<?xml version="1.0" encoding="UTF-8"?>
 <excerpt>
   <source>
     <book
      author='Lewis Carroll'
-     title='Through the Looking Glass'
+     title='Through the Looking-Glass'
      subtitle='and What Alice Found There'
      actual-author='Charles Lutwidge Dodgson'
      publisher='Project Gutenberg'
@@ -275,7 +278,7 @@ Here's one possible representation of the excerpt in XML.
   </source>
   <paragraph>
     <quotation mode='spoken' source='White Queen'>
-       What manner of things?
+      What manner of things?
     </quotation>
     said the Queen, looking over the 
     <ref target="King's memorandum">book</ref> 
@@ -351,4 +354,133 @@ reference for more information about a line in Jabberwocky.
 
 @section{Representing collections of information}
 
-@emph{Forthcoming ...}
+We've seen that XML provides a somewhat straightforward mechanisms for
+representing both the content of documents and additional information
+about that content.  However, that's not the only way in which digital
+humanists use XML; many find that XML is an equally natural way to represent
+collections of data or metadata.
+
+Suppose, for example, that we wanted to store information about the
+books in Project Gutenberg.  In some sense, this task is much like
+that of representing a single document: We have some data (in this case,
+the list of books) and some additional information that we want to 
+convey about the data (in this case, that might be to indicate which
+text represents author, title, and URL).
+
+@xml-block|{
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+  <name>Project Gutenberg</name>
+  <bookinfo book-id="000001">
+    <author><first>Thomas</first> <last>Jefferson</last></author>
+    <title>The Declaration of Independence of the United States of America</title>
+    <url>https://www.gutenberg.org/ebooks/1</url>
+  </bookinfo>
+  <bookinfo book-id="000002">
+    <author>
+      Anonymous
+      <alternative>
+        The United States of America
+      </alternative>
+    </author>
+    <title>The United States Bill of Rights</title>
+    <url>https://www.gutenberg.org/ebooks/2</url>
+  </bookinfo>
+  ...
+  <bookinfo book-id="000011">
+    <author author-id="412369">
+      <first>Lewis</first> <last>Carroll</last>
+      <alternative>
+        <first>Charles</first> <middle>Lutwidge</middle> <last>Dogson</last>
+      </alternative>
+    </author>
+    <title>Alice's Adventures in Wonderland</title>
+    <url>https://www.gutenberg.org/ebooks/11</url>
+  </bookinfo>
+  <bookinfo book-id="000012">
+    <author author-id="412369"/>
+    <title>Through the Looking-Glass</title>
+    <url>https://www.gutenberg.org/ebooks/11</url>
+  </bookinfo>
+  ...
+</collection>
+}|
+
+XML is not the only format one can use to store this information.
+In fact, many people find XML to be overly verbose and prefer other
+formats, such as CSV.  (We'll cover CSV in a subsequent reading.)
+XML's structure can also slow down the initial processing of document
+data.  However, XML still has some advantages for situations like
+this.  First, it remains comparatively readable.  Second, it makes
+it much easier to deal with optional information, such as the
+alternative authors we have for some situations but not for others.
+
+As we found when annotating @book-title{Through the Looking-Glass},
+XML allows us to indicate the same information in multiple ways.
+Suppose, for example, we wanted to represent all of the quotations
+from that work.  We might follow the model we used in our original
+form.
+
+@xml-block|{
+<?xml version="1.0" encoding="UTF-8"?>
+<elements>
+  <quotation mode='spoken' source='Alice'>
+    Oh, you wicked little thing!
+  </quotation>
+  ...
+  <quotation mode='spoken' source='White Queen'>
+    What manner of things?
+  </quotation>
+  <quotation mode='written' source='Alice'>
+    The White Knight is sliding down the poker. He balances very badly
+  </quotation>
+  <quotation mode='spoken' source='White Queen'>
+    That’s not a memorandum of <emphasize>your</emphasize> feelings!
+  </quotation>
+  <quotation mode='introspective' source='Alice'>
+    —for it’s all in some language I don’t know,
+  </quotation>
+  ...
+</elements>
+}|
+
+We might instead follow a model closer to the one we used for the
+Project Gutenberg list.
+
+@xml-block|{
+<?xml version="1.0" encoding="UTF-8"?>
+<elements>
+  <quotation>
+    <mode>spoken</mode>
+    <source>Alice</source>
+    <audience>The black kitten</audience>
+    <content>Oh, you wicked little thing!</content>
+  </quotation>
+  ...
+  <quotation>
+    <mode>spoken</mode>
+    <source>White Queen</source>
+    <content>What manner of things?</content>
+  </quotation>
+  <quotation>
+    <mode>written</mode>
+    <source>Alice</source>
+    <content>The White Knight is sliding down the poker. He balances very badly</content>
+  </quotation>
+}|
+
+Which is more ``correct''?  Neither; it depends on what you, as designer,
+choose.  With practice, you'll find that different strategies work better
+for different situations.  Fortunately, you will also find that you can
+write programs that translate between the different representations.
+
+@section{Additional resources}
+
+The Text Encoding Initiative (TEI) provides a fairly standard set
+of markup used by many digital humanists.  For an introduction, check
+out @url{http://teibyexample.org}.
+
+The World Wide Web Consortium (W3C) maintains the "XML standard"; the
+official rules for XML.  You can find the official description of XML 1.0
+at @url{https://www.w3.org/TR/2008/REC-xml-20081126/}.
+

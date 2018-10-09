@@ -9,27 +9,45 @@
 ; +-----------+
 
 (require scribble/base)
+(require scribble/manual)
 
 ; +---------+--------------------------------------------------------
 ; | Exports |
 ; +---------+
 
-(provide summary)
-(provide section*)
-(provide prefix)
-(provide sect)
-(provide section:preparation)
-(provide section:exercises)
-(provide section:extra)
-(provide section:reference)
+(provide book-title)
 (provide exercise)
 (provide extra)
+(provide prefix)
+(provide sect)
+(provide section*)
+(provide section:exercises)
+(provide section:extra)
+(provide section:preparation)
+(provide section:reference)
+(provide summary)
+(provide verb)
+(provide xml)
+(provide xml-block)
 
 ; +---------+--------------------------------------------------------
 ; | Globals |
 ; +---------+
 
+;;; Global:
+;;;   _exercise_
+;;; Type:
+;;;   non-negative integer
+;;; Content:
+;;;   The number of the current exercise
 (define _exercise_ 0)
+
+;;; Global:
+;;;   _extra
+;;; Type:
+;;;   non-negative integer
+;;; Content:
+;;;   The number of the current extra exercise
 (define _extra_ 0)
 
 ; +--------+---------------------------------------------------------
@@ -89,9 +107,40 @@
     (subsection #:tag (string-append (prefix) "-extra-" (twodig _extra_))
                 title ...)))
 
+;;; Macro:
+;;;   xml-block
+;;; Parameters:
+;;;   code, a string
+;;; Purpose:
+;;;   Render XML code as a text block
+;;; Produces:
+;;;   elt, a Scribble element
+;;; Ponderings:
+;;;   Eventually, I may produce/include a parser for XML.  For now, this
+;;;   just renders things verbatim.
+(define-syntax-rule (xml-block str ...)
+  (codeblock #:keep-lang-line? #f 
+             #:line-numbers 0
+	     "#lang reader \"plaintext.rkt\"\n" 
+	     str ...))
+
+; (nested #:style 'code-inset (verbatim str ...)))
+; (codeblock #:line-numbers 1 str ...))
+; (codeblock #:line-numbers #t "#lang xml" "\n" str ...))
+
 ; +---------------------+--------------------------------------------
 ; | Exported Procedures |
 ; +---------------------+
+
+;;; Procedure:
+;;;   book-title
+;;; Parameters:
+;;;   title, a string
+;;; Purpose:
+;;;   Generate the title of a book
+;;; Produces:
+;;;   Code for the title of a book
+(define book-title emph)
 
 ;;; Procedure:
 ;;;   prefix
@@ -139,6 +188,35 @@
   (lambda ()
     ; Reset exercise count?
     (section #:tag (string-append (prefix) "-reference") "Reference")))
+
+;;; Procedure:
+;;;   verb
+;;; Parameters:
+;;;   str, a string
+;;; Purpose:
+;;;   Render something verbatim
+;;; Produces:
+;;;   elt, a Scribble element
+;;; Ponderings:
+;;;   Like tt or literal, but handles quotations right (I think).
+(define verb
+  (lambda (code)
+    (elem #:style 'tt (literal code))))
+
+;;; Procedure:
+;;;   xml
+;;; Parameters:
+;;;   code, a string
+;;; Purpose:
+;;;   Render XML code
+;;; Produces:
+;;;   elt, a Scribble element
+;;; Ponderings:
+;;;   Eventually, I may produce a parser for XML.  For now, this
+;;;   just renders things verbatim.
+(define xml
+  (lambda (code)
+    (elem #:style 'tt (literal code))))
 
 ; +-----------------+------------------------------------------------
 ; | Local Utilities |

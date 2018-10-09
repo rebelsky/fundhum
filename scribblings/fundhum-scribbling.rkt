@@ -19,6 +19,7 @@
 (provide exercise)
 (provide extra)
 (provide prefix)
+(provide q)
 (provide sect)
 (provide section*)
 (provide section:exercises)
@@ -106,6 +107,47 @@
   (extra-helper
     (subsection #:tag (string-append (prefix) "-extra-" (twodig _extra_))
                 title ...)))
+
+;;; Macro:
+;;;   q
+;;; Parameters:
+;;;   text, a Scribble element or sequence of Scribble elements
+;;; Purpose:
+;;;   Put quotation marks around the text.
+;;; Produces:
+;;;   textplus ..., a sequence of Scribble elements
+;;; Problems:
+;;;   Likely needs some real testing.
+(define-syntax-rule (q text ...)
+  (begin 
+    (inc-quote-level!)
+    (let ([result (q-core text ...)])
+      (dec-quote-level!)
+      result)))
+
+(define QUOTE-LEVEL 0)
+
+(define inc-quote-level!
+  (lambda ()
+    (set! QUOTE-LEVEL (+ QUOTE-LEVEL 1))))
+
+(define dec-quote-level!
+  (lambda ()
+    (set! QUOTE-LEVEL (- QUOTE-LEVEL 1))))
+
+(define q-core
+  (lambda stuff
+    (define OPEN (if (odd? QUOTE-LEVEL) "``" "`"))
+    (define CLOSE (if (odd? QUOTE-LEVEL) "''" "'"))
+    (cond
+      [(null? stuff)
+       (string-append OPEN CLOSE)]
+      [(and (null? (cdr stuff)) (string? (car stuff)))
+       (string-append OPEN (car stuff) CLOSE)]
+      [else
+       (append (list OPEN)
+               stuff
+	       (list CLOSE))])))
 
 ;;; Macro:
 ;;;   xml-block

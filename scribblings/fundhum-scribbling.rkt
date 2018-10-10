@@ -27,6 +27,7 @@
 (provide section:preparation)
 (provide section:reference)
 (provide summary)
+(provide text-block)
 (provide verb)
 (provide xml)
 (provide xml-block)
@@ -150,21 +151,34 @@
 	       (list CLOSE))])))
 
 ;;; Macro:
-;;;   xml-block
+;;;   text-block
 ;;; Parameters:
-;;;   code, a string
+;;;   elements ...
 ;;; Purpose:
 ;;;   Render XML code as a text block
 ;;; Produces:
-;;;   elt, a Scribble element
+;;;   elt, a Scribble element (or something like that)
+(define-syntax-rule (text-block elements ...)
+  (codeblock #:keep-lang-line? #f 
+	     "#lang reader \"plaintext.rkt\"\n" 
+	     elements ...))
+
+;;; Macro:
+;;;   xml-block
+;;; Parameters:
+;;;   elements ..., zero or more Scribble elements
+;;; Purpose:
+;;;   Render XML code as a text block
+;;; Produces:
+;;;   elt, a Scribble element (or something like that)
 ;;; Ponderings:
 ;;;   Eventually, I may produce/include a parser for XML.  For now, this
 ;;;   just renders things verbatim.
-(define-syntax-rule (xml-block str ...)
+(define-syntax-rule (xml-block elements ...)
   (codeblock #:keep-lang-line? #f 
              #:line-numbers 0
 	     "#lang reader \"plaintext.rkt\"\n" 
-	     str ...))
+	     elements ...))
 
 ; (nested #:style 'code-inset (verbatim str ...)))
 ; (codeblock #:line-numbers 1 str ...))

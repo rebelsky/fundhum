@@ -3,7 +3,7 @@
 @(require scribble/manual)
 @(require "./fundhum-scribbling.rkt")
 
-@title{Generalized document markup with XML}
+@title[#:tag "xml-reading"]{Generalized document markup with XML}
 @author{Samuel A. Rebelsky}
 
 @summary{We consider issues related to the storage of text documents

@@ -88,8 +88,10 @@
 ;;;   convenient
 ;;; Produces:
 ;;;   sect, an element
+;;; Postconditions:
+;;;   sect is tagged with (prefix):tag.
 (define-syntax-rule (sect tag content ...)
-  (section #:tag (string-append (prefix) "-" tag) content ...))
+  (section #:tag (string-append (prefix) ":" tag) content ...))
 
 ;;; Macro:
 ;;;   exercise
@@ -214,6 +216,44 @@
 	  (set! val (car params))))))
 
 ;;; Procedure:
+;;;   section:exercises
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Generate the header for the exercises in a lab.
+;;; Produces:
+;;;   sect, a Scribble element
+;;; Preconditions:
+;;;   The prefix has been set with prefix.
+;;; Postconditions:
+;;;   * The exercise count is reset to zero.
+;;;   * sect appropriately represents the start of a set of exercises
+;;;   * sect's tag is (prefix):exercises
+(define section:exercises
+  (lambda ()
+    (set! _exercise_ 0)
+    (section #:tag (string-append (prefix) ":exercises") "Exercises")))
+
+;;; Procedure:
+;;;   section:extra
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Generate the header for the extra problems in a lab.
+;;; Produces:
+;;;   sect, a Scribble element
+;;; Preconditions:
+;;;   The prefix has been set with prefix.
+;;; Postconditions:
+;;;   * The extra count is reset to zero.
+;;;   * header appropriately represents the start of a set of extra exercises
+;;;   * sect's tag is (prefix):extra
+(define section:extra
+  (lambda ()
+    (set! _extra_ 0)
+    (section #:tag (string-append (prefix) ":extra") "Extra")))
+
+;;; Procedure:
 ;;;   section:preparation
 ;;; Parameters:
 ;;;   [None]
@@ -222,28 +262,30 @@
 ;;; Produces:
 ;;;   sect, an element
 ;;; Preconditions:
-;;;   [No additional]
+;;;   The prefix has been set with prefix.
 ;;; Postconditions:
 ;;;   * sect is a section heading
-;;;   * sect's tag is (prefix)-prep
+;;;   * sect's tag is (prefix):prep
 (define section:preparation
   (lambda ()
     (sect "prep" "Preparation")))
 
-(define section:exercises
-  (lambda ()
-    (set! _exercise_ 0)
-    (section #:tag (string-append (prefix) "-exercises") "Exercises")))
-
-(define section:extra
-  (lambda ()
-    (set! _extra_ 0)
-    (section #:tag (string-append (prefix) "-extra") "Extra")))
-
+;;; Procedure:
+;;;   section:reference
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Generate the appropriate header for the reference part of a lab.
+;;; Produces:
+;;;   sect, an element
+;;; Preconditions:
+;;;   The prefix has been set with prefix.
+;;; Postconditions:
+;;;   * sect is a section heading
+;;;   * sect's tag is (prefix)-reference
 (define section:reference
   (lambda ()
-    ; Reset exercise count?
-    (section #:tag (string-append (prefix) "-reference") "Reference")))
+    (sect "reference" "Reference")))
 
 ;;; Procedure:
 ;;;   verb

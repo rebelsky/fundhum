@@ -3,7 +3,7 @@
 @(require "./fundhum-scribbling.rkt")
 @(require scribble/manual)
 
-@title{Algorithm building blocks}
+@title[#:tag "algorithms"]{Algorithm building blocks}
 @author{Samuel A. Rebelsky}
 @prefix{algorithms}
 @summary{We consider structures that you will use as you build algorithms.}

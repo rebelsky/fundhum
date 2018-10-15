@@ -18,6 +18,7 @@
 (provide book-title)
 (provide exercise)
 (provide extra)
+(provide noindent)
 (provide prefix)
 (provide q)
 (provide sect)
@@ -222,6 +223,20 @@
 ;;;   Code for the title of a book
 (define book-title emph)
 
+;;; Procedure:
+;;;   noindent
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Add a "don't indent" signal for LaTeX output.
+;;; Produces:
+;;;   annotation, an element
+;;; Props:
+;;;   From Matthew Flatt's note at https://groups.google.com/forum/#!topic/racket-users/9xBZOD9lqsU
+(define noindent
+  (lambda ()
+    (elem #:style "noindent")))
+    
 ;;; Procedure:
 ;;;   prefix
 ;;; Parameters:

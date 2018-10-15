@@ -23,7 +23,7 @@ First, open a terminal Window.
 
 Then, type the following commands.  (The tilde symbol, \verb{~},
 which appears in many of those commands, is typically found at the
-top-left of standard U.S. keyboards.)
+top left of standard U.S. keyboards.)
 
 @text-block|{
 chmod a+x ~

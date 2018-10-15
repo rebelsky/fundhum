@@ -26,6 +26,8 @@
 (provide section:extra)
 (provide section:preparation)
 (provide section:reference)
+(provide section:self-checks)
+(provide self-check)
 (provide summary)
 (provide text-block)
 (provide verb)
@@ -51,6 +53,14 @@
 ;;; Content:
 ;;;   The number of the current extra exercise
 (define _extra_ 0)
+
+;;; Global:
+;;;   _self_check_
+;;; Type:
+;;;   non-negative integer
+;;; Content:
+;;;   The number of the current self check
+(define _self_check_ 0)
 
 ; +--------+---------------------------------------------------------
 ; | Macros |
@@ -103,12 +113,12 @@
 ;;;   exercise, an element heading
 (define-syntax-rule (exercise title ...)
   (exercise-helper
-    (subsection #:tag (string-append (prefix) "-" (twodig _exercise_))
+    (subsection #:tag (string-append (prefix) ":exercise-" (twodig _exercise_))
                 title ...)))
 
 (define-syntax-rule (extra title ...)
   (extra-helper
-    (subsection #:tag (string-append (prefix) "-extra-" (twodig _extra_))
+    (subsection #:tag (string-append (prefix) ":extra-" (twodig _extra_))
                 title ...)))
 
 ;;; Macro:
@@ -152,6 +162,18 @@
                stuff
 	       (list CLOSE))])))
 
+;;; Macro:
+;;;   self-check
+;;; Parameters:
+;;;   title ..., a bunch of elements
+;;; Purpose:
+;;;   generate the header for a self check
+(define-syntax-rule (self-check title ...)
+  (self-check-helper
+    (subsection #:tag (string-append (prefix) ":self-check-" (twodig _self_check_))
+                "Check " (number->string _self_check_) ": " title ...)))
+
+;   (subsection #:style 'unnumbered #:tag (string-append (prefix) ":self-check-" (twodig _self_check_))
 ;;; Macro:
 ;;;   text-block
 ;;; Parameters:
@@ -288,6 +310,25 @@
     (sect "reference" "Reference")))
 
 ;;; Procedure:
+;;;   section:self-checks
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Generate the header for the self checks in a reading
+;;; Produces:
+;;;   sect, a Scribble element
+;;; Preconditions:
+;;;   The prefix has been set with prefix.
+;;; Postconditions:
+;;;   * The self-check count is reset to zero.
+;;;   * header appropriately represents the start of a set of self checks
+;;;   * sect's tag is (prefix):self-checks
+(define section:self-checks
+  (lambda ()
+    (set! _self_check_ 1)
+    (section #:tag (string-append (prefix) ":self-checks") "Self Checks")))
+
+;;; Procedure:
 ;;;   verb
 ;;; Parameters:
 ;;;   str, a string
@@ -353,3 +394,10 @@
   (lambda (thing)
     (set! _extra_ (+ 1 _extra_))
     thing))
+
+(define self-check-helper
+  (lambda (thing)
+    (set! _self_check_ (+ 1 _self_check_))
+    thing))
+
+

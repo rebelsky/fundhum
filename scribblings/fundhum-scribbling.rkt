@@ -19,28 +19,28 @@
 ; | Exports |
 ; +---------+
 
-(provide book-title)
-(provide exercise)
-(provide extra)
-(provide fundhum-eval)
-(provide fundhum-examples)
-(provide image-examples)
-(provide noindent)
-(provide prefix)
-(provide q)
-(provide sect)
-(provide section*)
-(provide section:exercises)
-(provide section:extra)
-(provide section:preparation)
-(provide section:reference)
-(provide section:self-checks)
-(provide self-check)
-(provide summary)
-(provide text-block)
-(provide verb)
-(provide xml)
-(provide xml-block)
+(provide book-title
+         exercise
+         extra
+         fundhum-eval
+         fundhum-examples
+         image-examples
+         noindent
+         prefix
+         q
+         sect
+         section*
+         section:exercises
+         section:extra
+         section:preparation
+         section:reference
+         section:self-checks
+         self-check
+         summary
+         text-block
+         verb
+         xml
+         xml-block)
 
 ; +--------------------+---------------------------------------------
 ; | Exported variables |

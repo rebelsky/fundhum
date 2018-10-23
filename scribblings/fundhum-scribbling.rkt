@@ -233,9 +233,9 @@
 (define-syntax-rule (self-check title ...)
   (self-check-helper
     (subsection #:tag (string-append (prefix) ":self-check-" (twodig _self_check_))
+                #:style 'unnumbered
                 "Check " (number->string _self_check_) ": " title ...)))
 
-;   (subsection #:style 'unnumbered #:tag (string-append (prefix) ":self-check-" (twodig _self_check_))
 ;;; Macro:
 ;;;   text-block
 ;;; Parameters:

@@ -2,10 +2,9 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@prefix{starting-scheme}
-
-@title{Laboratory: Starting Scheme}
+@title[#:tag "intro-racket-lab"]{Laboratory: Getting started with Racket}
 @author{Samuel A. Rebelsky}
+@prefix{intro-racket-lab}
 
 @summary{_SUMMARY_}
 
@@ -17,3 +16,4 @@
 
 @section:reference{}
 
+@section:acknowledgements{}

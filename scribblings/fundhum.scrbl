@@ -21,5 +21,5 @@ programming language for most of those examples.  See the
 @include-section{html-lab-linux.scrbl}
 @include-section{algorithm-building-blocks.scrbl}
 @include-section{intro-racket-reading.scrbl}
-@include-section{starting-scheme-lab.scrbl}
+@include-section{intro-racket-lab.scrbl}
 @include-section{acknowledgements.scrbl}

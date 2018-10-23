@@ -18,6 +18,7 @@
 (provide book-title)
 (provide exercise)
 (provide extra)
+(provide fundhum-eval)
 (provide noindent)
 (provide prefix)
 (provide q)
@@ -35,9 +36,9 @@
 (provide xml)
 (provide xml-block)
 
-; +---------+--------------------------------------------------------
-; | Globals |
-; +---------+
+; +------------------+-----------------------------------------------
+; | Shared variables |
+; +------------------+
 
 ;;; Global:
 ;;;   _exercise_

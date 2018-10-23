@@ -1,6 +1,7 @@
-#lang scribble/manual
+#lang scribble/book
 @require[@for-label[fundhum
                     racket/base]]
+@(require scribble/manual)
 
 @title{FunDHum: A Functional Approach to the Digital Humanities}
 @author{Samuel A. Rebelsky}

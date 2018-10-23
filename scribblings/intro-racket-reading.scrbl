@@ -53,7 +53,22 @@ multiplication symbol.
 
 As this example suggests, we have already started to explore both basic
 operations (addition and multiplication) and sequencing (through nesting)
-in Racket.
+in Racket.  You should keep three points in mind when writing and reading
+Racket expressions.
+
+@itemize{
+@item{@emph{Parenthesize all non-trivial expressions}.  Parentheses
+tell Racket that you want to apply a procedure to some values.}
+@item{@emph{Do not parenthesize basic values}.  Since there's no
+procedure call involved with a basic value, we do not write parentheses.}
+@item{@emph{Write expressions in prefix order}.  That is, you write
+the procedure (function, operation, subroutine) before the arguments,
+even if it's something like @verb{+} that you would normally put between
+arguments.}
+@item{@emph{Sequence computations by nesting.}  If you have intermediate
+computations that you need to do, you can parenthesize them and put them
+within another rexpression.}
+}
 
 @section{Beyond numeric expressions}
 

@@ -10,6 +10,10 @@
 
 (require scribble/base)
 (require scribble/manual)
+; (require scribble/eval)
+(require scribble/example)
+(require racket/sandbox)
+(require teachpack/2htdp/scribblings/img-eval)
 
 ; +---------+--------------------------------------------------------
 ; | Exports |
@@ -19,6 +23,8 @@
 (provide exercise)
 (provide extra)
 (provide fundhum-eval)
+(provide fundhum-examples)
+(provide image-examples)
 (provide noindent)
 (provide prefix)
 (provide q)
@@ -35,6 +41,27 @@
 (provide verb)
 (provide xml)
 (provide xml-block)
+
+; +--------------------+---------------------------------------------
+; | Exported variables |
+; +--------------------+
+
+;;; Variable:
+;;;   fundhum-eval
+;;; Type:
+;;;   evaluator
+;;; Content:
+;;;   An evaluator that is appropriate for the fundhum exercises (or
+;;;   so I hope)
+(define fundhum-eval
+  (let ([so (sandbox-output)]
+        [seo (sandbox-error-output)])
+    (sandbox-output 'string)
+    (sandbox-error-output 'string)
+    (let ([result (make-evaluator 'racket)])
+      (sandbox-output so)
+      (sandbox-error-output seo)
+      result)))
 
 ; +------------------+-----------------------------------------------
 ; | Shared variables |
@@ -67,6 +94,28 @@
 ; +--------+---------------------------------------------------------
 ; | Macros |
 ; +--------+
+
+;;; Syntax:
+;;;   fundhum-examples
+;;; Parameters:
+;;;    e ..., expressions
+;;; Purpose:
+;;;   Generate a standard example
+(define-syntax-rule (fundhum-examples e ...)
+  (examples #:eval fundhum-eval
+            #:label #f
+	    e ...))
+
+;;; Syntax:
+;;;   image-examples
+;;; Parameters:
+;;;   e ..., expressions
+;;; Purpose:
+;;;   Generate examples involving images
+(define-syntax-rule (image-examples e ...)
+  (examples #:eval (make-img-eval)
+            #:label #f
+	    e ...))
 
 ;;; Syntax:
 ;;;   summary

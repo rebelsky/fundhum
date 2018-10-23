@@ -27,6 +27,7 @@
          image-examples
          noindent
          prefix
+	 prereqs
          q
          sect
          section*
@@ -116,6 +117,15 @@
   (examples #:eval (make-img-eval)
             #:label #f
 	    e ...))
+
+;;; Syntax:
+;;;   prereqs
+;;; Parameters:
+;;;   pr ..., text describing the prerequisites
+;;; Purpose:
+;;;   Generate the prerequisites
+(define-syntax-rule (prereqs pr ...)
+  (elem (noindent) (emph "Prerequisities: ") pr ...))
 
 ;;; Syntax:
 ;;;   summary

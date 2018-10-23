@@ -31,6 +31,7 @@
          q
          sect
          section*
+	 section:acknowledgements
          section:exercises
          section:extra
          section:preparation
@@ -311,6 +312,22 @@
       (if (null? params)
           val
 	  (set! val (car params))))))
+
+;;; Procedure:
+;;;   section:acknowledgements
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Generate the section header for the acknowledgements section
+;;; Produces:
+;;;   sect, a scribble element.
+;;; Preconditions:
+;;;   The prefix has been set with `prefix`.
+(define section:acknowledgements
+  (lambda ()
+    (section #:style 'unnumbered
+             #:tag (string-append (prefix) ":acknowledgements") 
+	     "Acknowledgements")))
 
 ;;; Procedure:
 ;;;   section:exercises

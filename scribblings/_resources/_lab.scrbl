@@ -2,10 +2,9 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@prefix{_PREFIX_}
-
-@title{_TITLE_}
+@title[#:tag "_PREFIX_"]{_TITLE_}
 @author{Samuel A. Rebelsky}
+@prefix{_PREFIX_}
 
 @summary{_SUMMARY_}
 
@@ -17,3 +16,4 @@
 
 @section:reference{}
 
+@section:acknowledgements{}

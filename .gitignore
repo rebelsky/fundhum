@@ -5,9 +5,10 @@
 *.pdf
 *.js
 
-# Editor emp files
+# Editor temp files
 *.swp
 *~
+.bak
 
 # Racket package stuff
 compiled

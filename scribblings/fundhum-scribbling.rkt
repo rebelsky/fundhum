@@ -20,11 +20,15 @@
 ; +---------+
 
 (provide book-title
+	 button
          exercise
          extra
          fundhum-eval
          fundhum-examples
          image-examples
+	 keycap
+	 menu
+	 menu-item
          noindent
          prefix
 	 prereqs
@@ -283,6 +287,46 @@
 ;;; Produces:
 ;;;   Code for the title of a book
 (define book-title emph)
+
+;;; Procedure:
+;;;   button
+;;; Parameters:
+;;;   str, a string
+;;; Purpose:
+;;;   Generate a button
+;;; Produces:
+;;;   exp, a Scribble expression
+(define button bold)
+
+;;; Procedure:
+;;;   keycap
+;;; Parameters:
+;;;   str, a string
+;;; Purpose:
+;;;   Generate a formatted keycap.
+;;; Produces:
+;;;   exp, a Scribble expression
+(define keycap bold)
+
+;;; Procedure:
+;;;   menu
+;;; Parameters:
+;;;   str, a string
+;;; Purpose:
+;;;   Generate a menu title.
+;;; Produces:
+;;;   exp, a Scribble expression
+(define menu bold)
+
+;;; Procedure:
+;;;   menu-item
+;;; Parameters:
+;;;   str, a string
+;;; Purpose:
+;;;   Generate a menu title.
+;;; Produces:
+;;;   exp, a Scribble expression
+(define menu-item bold)
 
 ;;; Procedure:
 ;;;   noindent

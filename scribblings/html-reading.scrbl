@@ -125,7 +125,7 @@ As you might expect, HTML specifies a wide array of tags.  You can
 learn about them by reading the official specification or less formal
 documentation, by looking at the underlying source of any Web pages,
 and by asking people.  For now, we'll start with a few simple tags.
-You'll discover more in the @seclink["html-lab"]{associated lab}.
+You'll discover more in the @seclink["html-lab-linux"]{associated lab}.
 
 @itemize{
 @item{The @xml{p} tag marks paragraphs.}

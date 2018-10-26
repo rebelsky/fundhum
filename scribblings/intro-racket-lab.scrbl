@@ -2,9 +2,9 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@title[#:tag "intro-racket-lab"]{Laboratory: Getting started with Racket}
-@author{Samuel A. Rebelsky}
 @prefix{intro-racket-lab}
+@lab-title{Getting started with Racket}
+@author{Samuel A. Rebelsky}
 
 @summary{_SUMMARY_}
 

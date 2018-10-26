@@ -27,6 +27,7 @@
          fundhum-examples
          image-examples
 	 keycap
+	 lab-title
 	 menu
 	 menu-item
          noindent
@@ -122,6 +123,19 @@
   (examples #:eval (make-img-eval)
             #:label #f
 	    e ...))
+
+;;; Syntax:
+;;;   lab-title
+;;; Parameters:
+;;;   name ..., expressions
+;;; Purpose:
+;;;   Generate the lab title
+;;; Produces:
+;;;   elt, a Scribble element
+(define-syntax-rule (lab-title name ...)
+  (title #:tag (prefix)
+         (emph "Laboratory") ": "
+	 name ...))
 
 ;;; Syntax:
 ;;;   prereqs

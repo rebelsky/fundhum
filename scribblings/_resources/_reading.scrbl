@@ -3,7 +3,7 @@
 @(require "./fundhum-scribbling.rkt")
 @(require scribble/manual)
 
-@title[#:tag "_TAG_"]{_TITLE_}
+@title[#:tag "_PREFIX_"]{_TITLE_}
 @author{Samuel A. Rebelsky}
 @prefix{_PREFIX_}
 
@@ -11,7 +11,7 @@
 
 @prereqs{_LINKS_}
 
-@section[#:tag "_SECT_:introduction"]{Introduction}
+@section[#:tag "_PREFIX_:introduction"]{Introduction}
 
 @section:self-checks{}
 

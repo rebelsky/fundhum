@@ -2,9 +2,9 @@
 
 @(require "./fundhum-scribbling.rkt")
 
-@title[#:tag "_PREFIX_"]{_TITLE_}
-@author{Samuel A. Rebelsky}
 @prefix{_PREFIX_}
+@lab-title{_TITLE_}
+@author{Samuel A. Rebelsky}
 
 @summary{_SUMMARY_}
 

@@ -21,13 +21,17 @@
 
 (provide book-title
 	 button
+	 examples2
          exercise
+	 extend-evaluator!
          extra
          fundhum-eval
          fundhum-examples
          image-examples
 	 keycap
 	 lab-title
+	 make-fundhum-eval
+	 make-img-eval
 	 menu
 	 menu-item
          noindent
@@ -48,27 +52,6 @@
          verb
          xml
          xml-block)
-
-; +--------------------+---------------------------------------------
-; | Exported variables |
-; +--------------------+
-
-;;; Variable:
-;;;   fundhum-eval
-;;; Type:
-;;;   evaluator
-;;; Content:
-;;;   An evaluator that is appropriate for the fundhum exercises (or
-;;;   so I hope)
-(define fundhum-eval
-  (let ([so (sandbox-output)]
-        [seo (sandbox-error-output)])
-    (sandbox-output 'string)
-    (sandbox-error-output 'string)
-    (let ([result (make-evaluator 'racket)])
-      (sandbox-output so)
-      (sandbox-error-output seo)
-      result)))
 
 ; +------------------+-----------------------------------------------
 ; | Shared variables |
@@ -103,15 +86,40 @@
 ; +--------+
 
 ;;; Syntax:
+;;;   examples2
+;;; Parameters:
+;;;   eval, an evaluator
+;;;   e ..., options and expressions
+;;; Purpose:
+;;;   Generate a standard example
+(define-syntax-rule (examples2 eval e ...)
+  (examples #:eval eval
+            #:label #f
+	    e ...))
+
+;;; Procedure:
+;;;   extend-evaluator!
+;;; Parameters:
+;;;   eval, an evaluator
+;;;   e ..., expressions
+;;; Purpose:
+;;;   Extend eval with additional definitions or requires.
+;;; Produces:
+;;;   [Nothing; called for the side-effect
+(define-syntax-rule (extend-evaluator! eval e ...)
+  (examples #:eval eval
+            #:hidden
+	    e ...))
+
+;;; Syntax:
 ;;;   fundhum-examples
 ;;; Parameters:
 ;;;    e ..., expressions
 ;;; Purpose:
-;;;   Generate a standard example
+;;;   Generate a standard example with the fundhum evaluator
 (define-syntax-rule (fundhum-examples e ...)
-  (examples #:eval fundhum-eval
-            #:label #f
-	    e ...))
+  (examples2 fundhum-eval 
+             e ...))
 
 ;;; Syntax:
 ;;;   image-examples
@@ -259,7 +267,7 @@
 ;;; Parameters:
 ;;;   elements ...
 ;;; Purpose:
-;;;   Render XML code as a text block
+;;;   Render the elements as a text block
 ;;; Produces:
 ;;;   elt, a Scribble element (or something like that)
 (define-syntax-rule (text-block elements ...)
@@ -321,6 +329,26 @@
 ;;; Produces:
 ;;;   exp, a Scribble expression
 (define keycap bold)
+
+;;; Procedure:
+;;;   make-fundhum-eval
+;;; Parameters:
+;;;   [None]
+;;; Purpose:
+;;;   Make an evaluator appropriate for use with the fundhum expercises
+;;;   (or so I hope).
+;;; Produces:
+;;;   eval, an evaluator appropriate for use with @examples.
+(define make-fundhum-eval
+  (lambda ()
+    (let ([so (sandbox-output)]
+          [seo (sandbox-error-output)])
+      (sandbox-output 'string)
+      (sandbox-error-output 'string)
+      (let ([result (make-evaluator 'racket)])
+        (sandbox-output so)
+        (sandbox-error-output seo)
+        result))))
 
 ;;; Procedure:
 ;;;   menu
@@ -550,4 +578,16 @@
     (set! _self_check_ (+ 1 _self_check_))
     thing))
 
+; +--------------------+---------------------------------------------
+; | Exported variables |
+; +--------------------+
+
+;;; Variable:
+;;;   fundhum-eval
+;;; Type:
+;;;   evaluator
+;;; Content:
+;;;   An evaluator that is appropriate for the fundhum exercises (or
+;;;   so I hope)
+(define fundhum-eval (make-fundhum-eval))
 

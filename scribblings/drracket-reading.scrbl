@@ -68,7 +68,7 @@ When you start DrRacket, you will find that DrRacket is similar to
 most applications.  For example, it has a @menu{File} menu that lets
 you open and save files and an @menu{Edit} menu that permits you to
 cut, copy, and past text.  Like many applications, DrRacket usually
-starts with a window for a new, untitled, document.  Here's what the
+starts with a window for a new, untitled, document.  Here's what 
 DrRacket's primary window looks like.
 
 @image["images/drracket.png"]{A screenshot of the DrRacket program immediately after opening, showing no commands executed and a "#lang racket" directive in the definitions pane.}

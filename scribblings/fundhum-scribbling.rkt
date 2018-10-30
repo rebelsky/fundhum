@@ -428,7 +428,7 @@
 ;;;   entry, a list
 (define scheme-dict-entry
   (lambda (name value type)
-    (list (code name) (code value) (emph type))))
+    (list (verb name) (verb value) (emph type))))
 
 ;;; Procedure:
 ;;;   section:acknowledgements

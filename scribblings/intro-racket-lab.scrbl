@@ -12,6 +12,9 @@
 
 @section:exercises{}
 
+@;{Make sure to include at least one exercise in which students rename
+an existing procedure.}
+
 @section:extra{}
 
 @section:reference{}

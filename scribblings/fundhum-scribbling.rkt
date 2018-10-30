@@ -264,7 +264,7 @@
    (tabular #:style 'boxed
             #:sep (hspace 3)
             #:row-properties '(bottom-border '())
-            (list (list (bold "name") (bold "value") (bold "type"))
+            (list (list (bold "identifier") (bold "value") (bold "type"))
                   entries ...))))
 
 ;;; Macro:

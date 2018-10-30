@@ -4,6 +4,9 @@
 %.html: %.scrbl
 	scribble --html $<
 
+%.tex: %.scrbl
+	scribble --latex $<
+
 %: %.scrbl
 	scribble --htmls $<
 

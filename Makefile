@@ -16,3 +16,6 @@ web:
 
 pdf:
 	scribble --pdf scribblings/fundhum.scrbl
+
+install-local:
+	raco pkg install

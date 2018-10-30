@@ -13,7 +13,7 @@ most of this semester.}
 
 @prereqs{This section has no prerequisites.  However, you will find
 there is a bit of a @q{chicken and egg problem} for this reading and
-the @seclink["intro-racket-reading"]{reading that introduces the
+the @seclink["intro-racket"]{reading that introduces the
 Racket programming language}.  That is, it is difficult to introduce
 DrRacket, the environment in which you will develop program, without
 first introducing Racket, the language in which you will express

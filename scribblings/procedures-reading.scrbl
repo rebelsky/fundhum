@@ -10,11 +10,11 @@
 
 @summary{We explore why and how to define your own procedures in Racket}
 
-@prereqs{@Secref{intro-algorithms} and @secref{intro-racket}}
+@prereqs{@Secref{algorithms} and @secref{intro-racket}}
 
 @section[#:tag "procedures:introduction"]{Introduction}
 
-As you may recall from @seclink["intro-algorithms"]{the introduction
+As you may recall from @seclink["algorithms"]{the introduction
 to algorithms}, the ability to write subroutines is one of the key
 components of algorithm design.  Subroutines have a @emph{name} that
 we use to refer to the subroutine and zero or more @emph{parameters}

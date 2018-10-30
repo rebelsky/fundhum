@@ -9,6 +9,7 @@
 ; +-----------+
 
 (require scribble/base)
+(require scribble/core)
 (require scribble/manual)
 ; (require scribble/eval)
 (require scribble/example)
@@ -20,27 +21,29 @@
 ; +---------+
 
 (provide book-title
-	 button
-	 examples2
+         button
+         examples2
          exercise
-	 extend-evaluator!
+         extend-evaluator!
          extra
          fundhum-eval
          fundhum-examples
          image-examples
-	 keycap
-	 lab-title
-	 make-fundhum-eval
-	 make-img-eval
-	 menu
-	 menu-item
+         keycap
+         lab-title
+         make-fundhum-eval
+         make-img-eval
+         menu
+         menu-item
          noindent
          prefix
-	 prereqs
+         prereqs
          q
+         scheme-dict
+         scheme-dict-entry
          sect
          section*
-	 section:acknowledgements
+         section:acknowledgements
          section:exercises
          section:extra
          section:preparation
@@ -95,7 +98,7 @@
 (define-syntax-rule (examples2 eval e ...)
   (examples #:eval eval
             #:label #f
-	    e ...))
+            e ...))
 
 ;;; Procedure:
 ;;;   extend-evaluator!
@@ -109,7 +112,7 @@
 (define-syntax-rule (extend-evaluator! eval e ...)
   (examples #:eval eval
             #:hidden
-	    e ...))
+            e ...))
 
 ;;; Syntax:
 ;;;   fundhum-examples
@@ -130,7 +133,7 @@
 (define-syntax-rule (image-examples e ...)
   (examples #:eval (make-img-eval)
             #:label #f
-	    e ...))
+            e ...))
 
 ;;; Syntax:
 ;;;   lab-title
@@ -143,7 +146,7 @@
 (define-syntax-rule (lab-title name ...)
   (title #:tag (prefix)
          (emph "Laboratory") ": "
-	 name ...))
+         name ...))
 
 ;;; Syntax:
 ;;;   prereqs
@@ -248,7 +251,21 @@
       [else
        (append (list OPEN)
                stuff
-	       (list CLOSE))])))
+               (list CLOSE))])))
+
+;;; Macro:
+;;;   scheme-dict
+;;; Parameters:
+;;;   entries ..., a list of entries created by @scheme-dict-entry
+;;; Purpose:
+;;;   Generate a visualization of a Scheme dictionary, or so I hope.
+(define-syntax-rule (scheme-dict entries ...)
+  (list 
+   (tabular #:style 'boxed
+            #:sep (hspace 3)
+            #:row-properties '(bottom-border '())
+            (list (list (bold "name") (bold "value") (bold "type"))
+                  entries ...))))
 
 ;;; Macro:
 ;;;   self-check
@@ -272,8 +289,8 @@
 ;;;   elt, a Scribble element (or something like that)
 (define-syntax-rule (text-block elements ...)
   (codeblock #:keep-lang-line? #f 
-	     "#lang reader \"plaintext.rkt\"\n" 
-	     elements ...))
+             "#lang reader \"plaintext.rkt\"\n" 
+             elements ...))
 
 ;;; Macro:
 ;;;   xml-block
@@ -289,8 +306,8 @@
 (define-syntax-rule (xml-block elements ...)
   (codeblock #:keep-lang-line? #f 
              #:line-numbers 0
-	     "#lang reader \"plaintext.rkt\"\n" 
-	     elements ...))
+             "#lang reader \"plaintext.rkt\"\n" 
+             elements ...))
 
 ; (nested #:style 'code-inset (verbatim str ...)))
 ; (codeblock #:line-numbers 1 str ...))
@@ -397,7 +414,21 @@
     (lambda params
       (if (null? params)
           val
-	  (set! val (car params))))))
+          (set! val (car params))))))
+
+;;; Procedure:
+;;;   scheme-dict-entry
+;;; Parameters:
+;;;   name, a scribble value
+;;;   value, a scribble value
+;;;   type, a scribble value
+;;; Purpose:
+;;;   Create one entry in a dictionary
+;;; Produces:
+;;;   entry, a list
+(define scheme-dict-entry
+  (lambda (name value type)
+    (list (code name) (code value) (emph type))))
 
 ;;; Procedure:
 ;;;   section:acknowledgements
@@ -413,7 +444,7 @@
   (lambda ()
     (section #:style 'unnumbered
              #:tag (string-append (prefix) ":acknowledgements") 
-	     "Acknowledgements")))
+             "Acknowledgements")))
 
 ;;; Procedure:
 ;;;   section:exercises
@@ -561,7 +592,7 @@
   (lambda (val)
     (if (< val 10)
         (string-append "0" (number->string val))
-	(number->string val))))
+        (number->string val))))
 
 (define exercise-helper
   (lambda (thing)

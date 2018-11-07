@@ -50,6 +50,7 @@
          section:reference
          section:self-checks
          self-check
+	 strong
          summary
          text-block
          verb
@@ -536,6 +537,19 @@
   (lambda ()
     (set! _self_check_ 1)
     (section #:tag (string-append (prefix) ":self-checks") "Self Checks")))
+
+;;; Procedure:
+;;;   strong
+;;; Parameters:
+;;;   stuff, a string
+;;; Purpose:
+;;;   Render text as strong
+;;; Produces:
+;;;   elt, a Scribble element.
+;;; Ponderings:
+;;;   Should I do something like the quotation marks in which I look
+;;;   at the nesting?  
+(define strong bold)
 
 ;;; Procedure:
 ;;;   verb

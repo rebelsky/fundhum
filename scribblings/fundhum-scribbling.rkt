@@ -364,6 +364,7 @@
       (sandbox-output 'string)
       (sandbox-error-output 'string)
       (let ([result (make-evaluator 'racket)])
+        (extend-evaluator! result (require loudhum))
         (sandbox-output so)
         (sandbox-error-output seo)
         result))))

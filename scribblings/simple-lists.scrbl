@@ -34,7 +34,10 @@ build and manipulate lists.  We will return to lists in a near future.
 You may recall that there are five basic issues we should consider
 when we encounter a new type: its @emph{name}, its @emph{purpose}, how one 
 @emph{expresses values} in the type, how the computer @emph{displays} values 
-in the type, and what @emph{operations} are available to you.
+in the type, and what @emph{operations} are available to you.  (It may
+seem that we are repeating this list of issues; that's because we want
+you to accustom yourself to asking about those five issues each time you
+encounter or design a new type.)
 
 We've already covered the first two: The name of the type is @q{list} and 
 its primary purpose is to group or collect values.  Let's explore the rest.

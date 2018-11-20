@@ -27,7 +27,7 @@ programming language for most of those examples.  See the
 @include-section{intro-racket-lab.scrbl}		; TO DO
 
 @include-section{procedures-reading.scrbl}		; Ok
-@include-section{procedures-hop-reading.scrbl}		; TO DO
+@include-section{procedures-hop-reading.scrbl}		; Ok
 @include-section{documentation.scrbl}			; Ok
 @include-section{procedures-lab.scrbl}			; TO DO
 

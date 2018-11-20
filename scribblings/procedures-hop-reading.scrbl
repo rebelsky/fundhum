@@ -68,8 +68,9 @@ The composition of two functions, @emph{f} and @emph{g}, is written
 @emph{g} and then @emph{f}.  That is, (@emph{f}∘@emph{g})(@emph{x})
 = @emph{f}(@emph{g}(@emph{x})).
 
-In Scheme, we use @code{o} to represent function composition.  Let's
-start by composing a few procedures with themselves.
+In the Racket library for FunDHum, we use @code{o} to represent
+function composition.  Let's start by composing a few procedures
+with themselves.
 
 @fundhum-examples[
 (square 3)
@@ -143,26 +144,26 @@ one half of its parameter.  We can certainly use @code{lambda}
 
 But that may seem like a lot to write when all we're really doing
 is saying @q{divide <the parameter> by two}.  Fortunately, the
-loudhum library provides a keyword, @code{P}, that allows you to
+@code{loudhum} library provides a keyword, @code{Px}, that allows you to
 build a procedure from a @q{partial expression}, one in which some
-parts may have the special value @code{<>}, which we call @q{diamond},
+parts may have the special value @code{_}, which we call @q{underscore},
 that indicates @q{make this a parameter to the function}.  Here's
 how we'd define @q{half} using @q{P}.
 
 @fundhum-examples[
-(define half (P (/ <> 2)))
+(define half (Px (/ _ 2)))
 half
 (half 4)
 (half 5)
 ]
 
-Note that the location of the diamond is important.  Since the first
+Note that the location of the underscore is important.  Since the first
 parameter to the division operation is the dividend and the second 
 is the divisor, the diamond in @code{half} suggests that the input
 will be the dividend.  Let's look at the opposite definition.
 
 @fundhum-examples[
-(define flah (P (/ 2 <>)))
+(define flah (Px (/ 2 _)))
 flah
 (flah 4)
 (flah 5)
@@ -173,7 +174,7 @@ build from a partial expression.  In that case, the parameters are taken
 from left-to-right in the expression.
 
 @fundhum-examples[
-(define story (P (string-append <> " and " <> " went up the hill.")))
+(define story (Px (string-append _ " and " _ " went up the hill.")))
 (story "Jack" "Jill")
 (story "Bob" "Bill")
 (story "Joni" "Chuck")
@@ -224,7 +225,7 @@ But we can also define it slightly more concisely with
 
 @fundhum-examples[
 (define numwords 
-  (o length (P (string-split <> " "))))
+  (o length (Px (string-split _ " "))))
 (numwords "Beware the Jabberwock, my son!")
 ]
 

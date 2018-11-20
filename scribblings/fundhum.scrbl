@@ -36,6 +36,7 @@ programming language for most of those examples.  See the
 @;include-section{pictures.scrbl}			; TO DO / New
 @;include-section{strings.scrbl}			; TO DO / Reuse
 @;include-section{symbols.scrbl}			; TO DO / Reuse
+@include-section{simple-lists.scrbl}			; Ok
 @include-section{scheme-eval.scrbl}			; Needs significant work
 @include-section{scheme-eval-lab.scrbl}			; TO DO
 

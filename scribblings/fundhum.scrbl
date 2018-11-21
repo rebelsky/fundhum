@@ -32,7 +32,7 @@ programming language for most of those examples.  See the
 @include-section{procedures-lab.scrbl}			; TO DO
 
 @include-section{data-types.scrbl}			; Ok
-@;include-section{numbers.scrbl}			; TO DO / Reuse
+@include-section{numbers.scrbl}				; Ok
 @;include-section{pictures.scrbl}			; TO DO / New
 @;include-section{strings.scrbl}			; TO DO / Reuse
 @;include-section{symbols.scrbl}			; TO DO / Reuse

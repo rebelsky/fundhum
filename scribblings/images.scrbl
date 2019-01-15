@@ -17,8 +17,8 @@ for creating images.  It will likely be less accessible or inaccessible
 to students with limited vision.  In addition, the Scribble doccumentation
 system that we are using for this text does not provide a natural way
 to provide @q{alt text} for images.  We apologize for these deficiencies
-and have provided some alternate exercises for those who cannot or prefer
-not to do image-based work.
+and will provide alternative exercises for those who cannot or prefer not
+to do image-based work.
 
 @section[#:tag "images:introduction"]{Introduction}
 
@@ -112,8 +112,6 @@ create a pen, you use @code{(pen color width style cap join)} where
           background))
 ]
 
-You will have the opportunity to explore some other options in the lab.
-
 There are also a variety of other basic shapes.  @code{(triangle
 edge mode color)} creates an equilateral triangle, @code{(ellipse
 width height mode color)} creates an ellipse, and @code{(star
@@ -131,25 +129,101 @@ side mode color)} produces a five-pointed star.
 You can find a host of others shapes, including nine different kinds 
 of triangles, a more generalized star, a variety of polygons, and even
 text and curves in 
-@hyperlink["https://docs.racket-lang.org/teachpack/2htdpimage.html"]{The official DrRacket documentation}.
+@hyperlink["https://docs.racket-lang.org/teachpack/2htdpimage.html"]{The official DrRacket documentation for images}.
 
 @section[#:tag "images:colors"]{Colors}
 
+While we often think of colors by name (e.g., “red”, “violet”, or “burnt umber”), one of the great advantages of computational image making is that it is possible to describe colors that do not have a name. Moreover, it is often better to use a more precise definition than is possible with a name. After all, we may not agree on what precisely something like “springgreen” or “burlywood” means. (One color scheme that we’ve found has both “Seattle salmon” and “Oregon salmon”. Would you know how those two colors relate?)
+
+In fact, it may not only be more accurate to represent colors non-textually, it may also be more @emph{fficient}, since color names may require the computer to look up the name in a table. 
+
+The most popular scheme for representing colors for display on the computer screen is RGB. In this scheme, we build each color by combining varying amounts of the three primary colors, red, green, and blue. (What, you think that red, yellow, and blue are the primary colors? It turns out that primary works differently when you’re transmitting light, as on the computer screen, than when you’re reflecting light, as when you color with crayons on paper.)
+
+So, for example, purple is created by combining a lot of red, a lot of blue, and essentially no green. You get different purple-like colors by using different amounts of red and blue, and even different ratios of red and blue.
+
+When we describe the amount of red, green, and blue, we traditionally use integers between 0 and 255 to describe each component color. Why do we start with 0? Because we might not want any contribution from that color. Why do we stop with 255? Because 255 is one less than 28 (256), and it turns out that numbers between 0 and 255 are therefore easy to represent on computers. (For those who learned binary in high school or elsewhere, if you have exactly eight binary digits, and you only care to represent positive numbers, you can represent exactly the integers from 0 to 255. This is akin to being able to count up to 999 with three decimal digits.)
+
+If there are 256 possible values for each component, then there are 16,777,216 different colors that we can represent in standard RGB. Can the eye distinguish all of them? Not necessarily. Nonetheless, it is useful to know that this variety is available, and many eyes can make very fine distinctions between nearby colors.
+
+In DrRacket's image model, you can use the @code{make-color} procedure to
+create RGB colors.  @code{(make-color 0 255 0)} makes a bright green,
+@code{(make-color 0 128 128)} makes a blue-green color, and @code{(make-color
+64 0 64)} makes a relatively dark purple.
+
+@image-examples[
+(beside (circle 20 'solid (make-color 0 255 0))
+        (circle 20 'solid (make-color 0 128 128))
+        (circle 20 'solid (make-color 64 0 64)))
+]
+
 @section[#:tag "images:combine"]{Combining images}
 
-@code{beside}
+By themselves, the basic images (ellipses, rectangles, etc.) do not
+permit us to create much.  However, as some of the examples above
+suggest, we gain a great deal of power by combining existing images
+into a new image.  You're already seen three basic mechanisms for
+combining images.
 
-@code{(beside/align alignment i1 i2)}  Main ones: top middle bottom.
+@itemize{
+@item{@code{beside} places images side-by-side.  If the images have different heights, their vertical centers are aligned.}
+@item{@code{above} places images in a stack, each above the next.  If the images have different widths, their horizontal centers are aligned.}
+@item{@code{overlay} places images on top of each other.  The first image is on top, then the next one, and so on and so forth.  Images are aligned according to their centers.}
+}
 
-@code{above}
+@image-examples[
+(define small-gray (circle 10 'solid "gray"))
+(define medium-red (circle 15 'solid "red"))
+(define large-black (circle 20 'solid "black"))
+(beside small-gray medium-red large-black)
+(above small-gray medium-red large-black)
+(overlay small-gray medium-red large-black)
+(overlay large-black medium-red small-gray)
+]
 
-@code{(above/align alignment i1 i2)} Main ones: left, middle, right
+What if we don't want things aligned on centers?  The Racket iamge library
+provides alternatives to these three that provide a bit more control.
 
-@code{overlay}
+* @code{(beside/align alignment i1 i2 ...)} allows you to align
+  side-by-side images at the top or bottom (using @code{'top} and
+  @code{'bottom}).  You can also align at the center, mimicking
+  @code{beside}, using @code{'center}
+* @code{(above/align alignment i1 i2 ...)} allows you to align
+  vertically stacked images at the left, right, or middle (using
+  @code{'left}, @code{'right}, and @code{'middle}).
+* @code{(overlay/align halign valign i1 i2 ...)} allows you to
+  align overlaid images.
 
-@code{overlay/align}
+@image-examples[
+(define small-gray (circle 10 'solid "gray"))
+(define medium-red (circle 15 'solid "red"))
+(define large-black (circle 20 'solid "black"))
+(beside/align 'top small-gray medium-red large-black)
+(beside/align 'bottom small-gray medium-red large-black)
+(above/align 'left small-gray medium-red large-black)
+(above/align 'right small-gray medium-red large-black)
+(overlay/align 'left 'top small-gray medium-red large-black)
+(overlay/align 'left 'center small-gray medium-red large-black)
+(overlay/align 'left 'bottom small-gray medium-red large-black)
+(overlay/align 'right 'top small-gray medium-red large-black)
+(overlay/align 'right 'top large-black medium-red small-gray)
+]
 
-@code{overlay/offset}
+As the overlay examples suggest, the alignment is based on the
+@q{bounding box} of each image, the smallest rectangle that
+encloses the image.
+
+There's also another way to overlay images: You can offset the
+second one relative to the first with @code{(overlay-offset i1
+xoff yoff i2)}.  In this case, the second one is offset by the
+specified amount from its original position.
+
+@image-examples[
+(define medium-red (circle 15 'solid "red"))
+(define medium-black (circle 15 'solid "black"))
+(overlay/offset medium-red 2 6 medium-black)
+(overlay/offset medium-red 6 2 medium-black)
+(overlay/offset medium-red -3 -3 medium-black)
+]
 
 @section:self-checks{}
 
@@ -158,5 +232,5 @@ text and curves in
 @section:acknowledgements{}
 
 This section draws upon
-@hyperlink["https://docs.racket-lang.org/teachpack/2htdpimage.html"]{The DrRacket HtDP/2e Image Guide} 
+@hyperlink["https://docs.racket-lang.org/teachpack/2htdpimage.html"]{The DrRacket HtDP/2e Image Guide}.  The discussion of colors comes from @hyperlink["https://www.cs.grinnell.edu/~rebelsky/Courses/CSC151/2017S/readings/rgb-early-reading.html"]{a reading from Grinnell's CSC 151}.
 
